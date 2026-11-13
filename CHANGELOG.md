@@ -6,6 +6,35 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-13
+
+### Results (SYNTHETIC; no physical, biological or safety claim)
+
+- **Verdict still FAIL, now robust to calibration.** A bounded
+  analog calibration (Observer + Calibrator, δ ∈ [−0.05, 0.05] as
+  a fractional velocity adjustment) moves the claim gap by only
+  0.0223 orders of magnitude, while the gap is 19–37 orders. The
+  best-calibrated gap for the most generous macroscopic case
+  (1 kg, thermal, 3 THz) is 1.60 × 10¹⁹ at δ = −0.05 — nine
+  orders above the 10¹⁰ fail threshold. For the 300 GHz case the
+  best-calibrated gap is 1.60 × 10²⁰.
+- **Correction:** the smallest uncalibrated ratio over all
+  macroscopic cases sits at 3 THz, not 300 GHz (the ratio scales
+  with the THz wavelength). The 1.68 × 10¹⁹ figure is the 3 THz
+  value; at 300 GHz the same mass and velocity give 1.68 × 10²⁰.
+  No verdict changes; only the frequency label is corrected.
+
+### Added
+
+- `analog_calibration.py`: `AnalogObserver` (read-only gap
+  measurement), `AnalogCalibrator` (one clipped scalar in
+  [-0.05, 0.05]), `calibrate()` and `calibration_table()`
+  harness, `verdict_after_calibration()`.
+- `tests/test_analog_calibration.py`: exactly 5 tests, 5/5 pass
+  (full suite now 10/10).
+- `reports/matter-wave.md`: new "Analog calibration" section with
+  the best-calibrated gaps and the frequency-label correction.
+
 ## [0.1.0] - 2026-11-13
 
 ### Results (SYNTHETIC; no physical, biological or safety claim)

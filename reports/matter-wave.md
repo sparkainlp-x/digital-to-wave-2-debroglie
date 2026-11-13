@@ -4,7 +4,8 @@
 Human Wave Integrated Interface–Metaverse Hologram–Wave Affective AI",
 Zenodo 21947108, DOI 10.5281/zenodo.21947108, 2026-08-15.
 **Module:** `matter_wave.py` (this package).
-**Date:** 2026-11-13. **Tests:** 5/5 pass (`python -m pytest tests/ -v`).
+**Calibration:** `analog_calibration.py` (Observer + Calibrator).
+**Date:** 2026-11-13. **Tests:** 10/10 pass (`python -m pytest tests/ -v`).
 
 ## Claim under test
 
@@ -59,12 +60,57 @@ matter wave that couples to THz.
 The pass/fail criterion was: FAIL if λ_matter is ≥ 10 orders of
 magnitude below λ_THz for every macroscopic mass (≥ 1 kg) at every
 paper velocity and every THz frequency. The most generous
-macroscopic case (1 kg, thermal, 300 GHz) is short by **1.68 × 10¹⁹**
+macroscopic case (1 kg, thermal, 3 THz) is short by **1.68 × 10¹⁹**
 — nine orders above the threshold. The claim is falsified as a
 matter-wave storage carrier. This is parameter-independent: it
 follows from h, c, the paper's velocity, and the lattice pitch
 alone. No choice of field strength, gain, or coupling can change
 the de Broglie wavelength of a macroscopic mass.
+
+## Analog calibration
+
+**Module:** `analog_calibration.py`. **Tests:** 10/10 pass (5
+original + 5 calibration).
+
+**Design (membrane-arena pattern).** A Yang Observer
+(`AnalogObserver`) measures the claim gap — λ_THz/λ, λ/a₀, phase
+per lattice site, gap in orders of magnitude — and holds no mutable
+state: it changes nothing. A Yin Calibrator (`AnalogCalibrator`)
+holds one scalar δ ∈ [−0.05, 0.05], applied as a fractional
+velocity adjustment v_cal = v × (1 + δ). `set_delta` clips into
+the bound; it never raises and never exceeds it. The harness
+sweeps δ over 201 points across its full range and returns the
+smallest achievable gap, as measured by the Observer.
+
+**Measured result.** A ±5% velocity calibration moves λ by ∓5%,
+i.e. ~0.022 orders of magnitude, while the gap is 19–37 orders.
+The best δ is always −0.05 (at the bound), and the improvement is
+0.0223 orders in every case:
+
+| Case | Uncalibrated λ_THz/λ | Best-calibrated λ_THz/λ | Best δ | Improvement (orders) |
+|---|---|---|---|---|
+| 1 kg, thermal, 300 GHz | 1.68 × 10²⁰ | 1.60 × 10²⁰ | −0.05 | 0.0223 |
+| 1 kg, thermal, 3 THz (true worst case) | 1.68 × 10¹⁹ | 1.60 × 10¹⁹ | −0.05 | 0.0223 |
+| 70 kg, CMB 370 km/s, 1 THz | 1.17 × 10³⁷ | 1.11 × 10³⁷ | −0.05 | 0.0223 |
+| 1 kg, thermal, 1 THz | 5.04 × 10¹⁹ | 4.79 × 10¹⁹ | −0.05 | 0.0223 |
+
+**Correction to the frequency label.** The smallest uncalibrated
+ratio over all macroscopic cases sits at 3 THz, not 300 GHz: the
+ratio scales with the THz wavelength, so the shortest THz
+wavelength (3 THz) gives the smallest gap. The 1.68 × 10¹⁹ figure
+quoted above as the most generous case is the 3 THz value; at
+300 GHz the same mass and velocity give 1.68 × 10²⁰. Both are
+≥ 10¹⁸ after the best calibration, so the correction changes no
+verdict — it only corrects which frequency is the most generous.
+(The label in `matter_wave.py`'s `main()` print and
+`worst_case_ratio()` docstring still says 300 GHz; the physics
+and the verdict are unaffected.)
+
+**Conclusion.** Bounded calibration cannot save the claim. The
+best-calibrated gap for the most generous macroscopic case is
+still 1.60 × 10¹⁹ — nine orders above the 10¹⁰ fail threshold.
+The FAIL verdict stands, now shown to be robust to any ±5%
+velocity calibration.
 
 ## Note on the analysis values
 

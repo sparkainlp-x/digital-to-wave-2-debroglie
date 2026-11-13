@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "digital-to-wave-2-debroglie"
-version = "0.1.0"
+version = "0.2.0"
 description = "Matter-wave test of the object hologram claimed in Mun Seok Lee's 'Digital to Wave' Part II: the relativistic de Broglie wavelength of a macroscopic mass is ~10^37 times shorter than the THz wavelength, with a phase of ~10^31 rad across one lattice spacing; SYNTHETIC, no physical, biological or safety claim"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -30,7 +30,7 @@ test = ["pytest>=8"]
 Repository = "https://github.com/sparkainlp-x/digital-to-wave-2-debroglie"
 
 [tool.setuptools]
-py-modules = ["matter_wave"]
+py-modules = ["matter_wave", "analog_calibration"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

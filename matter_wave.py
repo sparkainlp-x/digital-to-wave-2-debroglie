@@ -249,8 +249,8 @@ def worst_case_ratio():
     masses (>= 1 kg), all paper velocities (CMB 370 km/s and thermal
     at 300 K) and all THz frequencies -- i.e. the most generous case
     for the paper. The minimum sits at the smallest mass, the lowest
-    velocity and the longest THz wavelength (1 kg, thermal, 300 GHz),
-    and it is still ~10^20."""
+    velocity and the shortest THz wavelength (1 kg, thermal, 3 THz),
+    and it is still ~10^19."""
     ratios = [
         wavelength_ratio_thz(f, m, v)
         for f in FREQUENCIES_HZ
@@ -358,7 +358,7 @@ def main():
         f"Same, at thermal velocity (300 K): {m_eq_th:.3e} kg."
     )
     print(
-        f"Most generous macroscopic case (1 kg, thermal, 300 GHz): "
+        f"Most generous macroscopic case (1 kg, thermal, 3 THz): "
         f"lambda_THz/lambda = {worst_case_ratio():.3e}."
     )
     print()

@@ -28,27 +28,44 @@ sites.
 is ≥ 10 orders of magnitude below the THz wavelength at every paper
 velocity (CMB 370 km/s and thermal at 300 K) and every THz frequency
 (300 GHz–3 THz). Even the most generous macroscopic case (1 kg,
-thermal, 300 GHz) is short by 1.68 × 10¹⁹. The mass whose matter
+thermal, 3 THz) is short by 1.68 × 10¹⁹. The mass whose matter
 wavelength would equal the 1 THz wavelength is 5.97 × 10⁻³⁶ kg —
 about 10⁵ times lighter than an electron. This is
 parameter-independent: it follows from h, c, the paper's velocity,
 and the lattice pitch alone.
 
+## Analog calibration
+
+An Observer agent (read-only) and a Calibrator agent (one clipped
+scalar δ ∈ [−0.05, 0.05], applied as a fractional velocity
+adjustment) test whether a bounded calibration could save the
+claim. It cannot: a ±5% velocity calibration moves the gap by only
+0.022 orders of magnitude, while the gap is 19–37 orders. The
+best-calibrated gap for the most generous macroscopic case (1 kg,
+thermal, 3 THz) is still 1.60 × 10¹⁹, at δ = −0.05. The FAIL
+verdict stands, robust to calibration. See
+`reports/matter-wave.md` ("Analog calibration") and
+`analog_calibration.py`.
+
 ## Run it
 
 ```sh
 python matter_wave.py   # prints the table and the verdict
-python -m pytest tests/ -v     # 5 tests, all must pass
+python analog_calibration.py   # prints the calibration table
+python -m pytest tests/ -v     # 10 tests, all must pass
 ```
 
 ## Layout
 
 - `matter_wave.py` — the module (stdlib + NumPy only).
+- `analog_calibration.py` — Observer (read-only) + Calibrator
+  (one clipped scalar δ ∈ [−0.05, 0.05]) + calibration harness.
 - `tests/test_matter_wave.py` — exactly 5 tests.
+- `tests/test_analog_calibration.py` — exactly 5 tests.
 - `reports/matter-wave.md` — one-page report with the numbers, the
-  verdict, and the honest caveats.
-- `pyproject.toml` — package metadata (version 0.1.0, AGPL-3.0-only).
-- `VERSION` — 0.1.0. `CHANGELOG.md` — release notes.
+  verdict, the calibration results, and the honest caveats.
+- `pyproject.toml` — package metadata (version 0.2.0, AGPL-3.0-only).
+- `VERSION` — 0.2.0. `CHANGELOG.md` — release notes.
 - `CITATION.cff`, `.zenodo.json`, `NOTICE` — citation and attribution
   metadata (DOI pending: no Zenodo record yet).
 - `MODULES.sha256` — SHA-256 checksums of the module, tests and report.
