@@ -1,0 +1,17 @@
+Digital to Wave 2 de Broglie
+Copyright (C) 2026 Jean-François Brisson / Spark AI NLP
+Licensed under the GNU Affero General Public License v3.0 only (AGPL-3.0-only); see LICENSE.
+
+This project tests the object matter wave claimed in
+Lee, Mun Seok (2026), "Digital to Wave: LGD In Situ Wave Memory-Human Wave Integrated Interface-Metaverse
+Hologram- Wave Affective AI", Zenodo preprint (Part II), https://doi.org/10.5281/zenodo.21947108
+(concept DOI 10.5281/zenodo.21947107).
+The preprint is distributed by its author under CC BY 4.0. No text, figures or other material from it are
+redistributed here; its numbers are cited and used as inputs to an independent computation. Its author has
+not reviewed or endorsed this software.
+
+Companion: sparkainlp-x/digital-to-wave-2-thz-validity, which validity-checked the Part II human-wave
+interface equations (dimensional error, impossible intensities, chi^(2) = 0 in bulk water), and
+sparkainlp-x/digital-to-wave-2-diffraction, which falsified the THz readout by the Abbe diffraction
+limit (readable capacity short by ~10^14-10^17). This module covers the section 3 matter-wave /
+hologram gap those repos left open. No DOI exists for this package yet.
