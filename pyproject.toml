@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "digital-to-wave-2-debroglie"
-version = "0.2.0"
+version = "0.3.0"
 description = "Matter-wave test of the object hologram claimed in Mun Seok Lee's 'Digital to Wave' Part II: the relativistic de Broglie wavelength of a macroscopic mass is ~10^37 times shorter than the THz wavelength, with a phase of ~10^31 rad across one lattice spacing; SYNTHETIC, no physical, biological or safety claim"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "AGPL-3.0-only"
 license-files = ["LICENSE"]
 authors = [{ name = "Jean-François Brisson" }]
-keywords = ["synthetic-data", "engineering-validity", "de-broglie", "matter-wave", "terahertz", "hologram", "reproducibility", "negative-results", "digital-to-wave"]
+keywords = ["synthetic-data", "engineering-validity", "de-broglie", "matter-wave", "terahertz", "hologram", "reproducibility", "negative-results", "digital-to-wave", "spooky"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Programming Language :: Python :: 3",
@@ -30,7 +30,7 @@ test = ["pytest>=8"]
 Repository = "https://github.com/sparkainlp-x/digital-to-wave-2-debroglie"
 
 [tool.setuptools]
-py-modules = ["matter_wave", "analog_calibration"]
+py-modules = ["matter_wave", "analog_calibration", "spooky_stability"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

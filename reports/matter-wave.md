@@ -5,7 +5,8 @@ Human Wave Integrated Interface–Metaverse Hologram–Wave Affective AI",
 Zenodo 21947108, DOI 10.5281/zenodo.21947108, 2026-08-15.
 **Module:** `matter_wave.py` (this package).
 **Calibration:** `analog_calibration.py` (Observer + Calibrator).
-**Date:** 2026-11-13. **Tests:** 10/10 pass (`python -m pytest tests/ -v`).
+**Spooky stability:** `spooky_stability.py` (Omega-Genesis spooky).
+**Date:** 2026-11-13. **Tests:** 15/15 pass (`python -m pytest tests/ -v`).
 
 ## Claim under test
 
@@ -102,15 +103,62 @@ quoted above as the most generous case is the 3 THz value; at
 300 GHz the same mass and velocity give 1.68 × 10²⁰. Both are
 ≥ 10¹⁸ after the best calibration, so the correction changes no
 verdict — it only corrects which frequency is the most generous.
-(The label in `matter_wave.py`'s `main()` print and
-`worst_case_ratio()` docstring still says 300 GHz; the physics
-and the verdict are unaffected.)
+The label in `matter_wave.py`'s `main()` print and
+`worst_case_ratio()` docstring was corrected to 3 THz in v0.2.0.
 
 **Conclusion.** Bounded calibration cannot save the claim. The
 best-calibrated gap for the most generous macroscopic case is
 still 1.60 × 10¹⁹ — nine orders above the 10¹⁰ fail threshold.
 The FAIL verdict stands, now shown to be robust to any ±5%
 velocity calibration.
+
+## Spooky stability
+
+**Module:** `spooky_stability.py`. **Tests:** 15/15 pass (10
+existing + 5 spooky).
+
+**Origin and definition.** The "spooky" concept comes from
+Omega-Genesis (Untitled7, the only measured run in the Colab
+notebooks: 10M iterations, seed 42). There, spooky correlation
+= mean pairwise |dot| over 5 noisy copies of the same 32-dim
+state, and it measured **0.9005** (CCI 0.8862, empathy 0.5503,
+self-knowing 0.0, zero bubbles). Spooky measures
+self-similarity under small noise, not entanglement.
+
+**Adaptation to this test.** The "state" here is the vector of
+log10(λ_THz/λ) across the module's 10 standard cases
+(electron, proton, 1 kg, 70 kg, 1000 kg at the CMB velocity
+and at thermal velocity, 300 K), all at 1 THz. A "noisy copy"
+recomputes that state after perturbing each case's (mass,
+velocity) by independent relative Gaussian noise with standard
+deviation σ (default 0.01, seed 42). The spooky correlation is
+the mean pairwise |dot| between 5 such noisy state vectors,
+each normalized to unit length — the same definition as
+Omega-Genesis, adapted to this scalar-output test.
+
+**Measured result.** Spooky correlation **0.99999995** at
+σ = 0.01 (min pairwise |dot| 0.99999992); 0.99999864 at
+σ = 0.05; 0.99964289 at σ = 0.50. The log-gap vector is
+almost unchanged by input noise, because the gap ratio is a
+smooth, near-linear function of velocity and mass. The max
+relative spread of the (linear) gap across copies at σ = 0.01
+is 4.88%. The verdict is stable too: **5/5 copies still FAIL**
+at σ = 0.01 (worst ratios 4.92 × 10¹⁹–5.13 × 10¹⁹) and at
+σ = 0.05 (4.45 × 10¹⁹–5.47 × 10¹⁹). The worst-case ratio here
+is the minimum over the macroscopic noisy cases (1 kg, 70 kg,
+1000 kg at both velocities, 1 THz), mirroring
+`matter_wave.verdict()`; the electron and proton are in the
+spooky state but are not the claim's subject.
+
+**Not comparable to 0.9005.** The spooky value here
+(≈ 1.0) is NOT comparable to the Omega-Genesis 0.9005. Same
+concept (self-similarity under noise), different state,
+different noise: the Omega-Genesis state is a 32-dim membrane
+state under 20% erasure stress, while this state is a 10-dim
+vector of log-gaps under relative Gaussian input noise. The
+numbers answer different questions and must not be compared.
+What the value does say, on its own terms, is that this test's
+FAIL is stable under input noise.
 
 ## Note on the analysis values
 

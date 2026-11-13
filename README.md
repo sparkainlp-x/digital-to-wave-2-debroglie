@@ -47,12 +47,26 @@ verdict stands, robust to calibration. See
 `reports/matter-wave.md` ("Analog calibration") and
 `analog_calibration.py`.
 
+## Spooky stability
+
+The Omega-Genesis "spooky" concept — mean pairwise |dot| over 5
+noisy copies of a state — applied to this test: the state is the
+vector of log10(λ_THz/λ) across the 10 standard cases at 1 THz,
+and each noisy copy perturbs every (mass, velocity) by relative
+Gaussian noise (σ = 0.01, seed 42). Measured spooky correlation
+**0.99999995**, and the verdict is stable **5/5 FAIL** at σ = 0.01
+and σ = 0.05. The FAIL is robust to input noise. The value is
+NOT comparable to the Omega-Genesis 0.9005 — same concept,
+different state, different noise. See `reports/matter-wave.md`
+("Spooky stability") and `spooky_stability.py`.
+
 ## Run it
 
 ```sh
 python matter_wave.py   # prints the table and the verdict
 python analog_calibration.py   # prints the calibration table
-python -m pytest tests/ -v     # 10 tests, all must pass
+python spooky_stability.py   # prints spooky + verdict stability
+python -m pytest tests/ -v     # 15 tests, all must pass
 ```
 
 ## Layout
@@ -60,12 +74,16 @@ python -m pytest tests/ -v     # 10 tests, all must pass
 - `matter_wave.py` — the module (stdlib + NumPy only).
 - `analog_calibration.py` — Observer (read-only) + Calibrator
   (one clipped scalar δ ∈ [−0.05, 0.05]) + calibration harness.
+- `spooky_stability.py` — Omega-Genesis spooky correlation over
+  noisy log-gap state vectors + verdict stability.
 - `tests/test_matter_wave.py` — exactly 5 tests.
 - `tests/test_analog_calibration.py` — exactly 5 tests.
+- `tests/test_spooky_stability.py` — exactly 5 tests.
 - `reports/matter-wave.md` — one-page report with the numbers, the
-  verdict, the calibration results, and the honest caveats.
-- `pyproject.toml` — package metadata (version 0.2.0, AGPL-3.0-only).
-- `VERSION` — 0.2.0. `CHANGELOG.md` — release notes.
+  verdict, the calibration results, the spooky stability, and the
+  honest caveats.
+- `pyproject.toml` — package metadata (version 0.3.0, AGPL-3.0-only).
+- `VERSION` — 0.3.0. `CHANGELOG.md` — release notes.
 - `CITATION.cff`, `.zenodo.json`, `NOTICE` — citation and attribution
   metadata (DOI pending: no Zenodo record yet).
 - `MODULES.sha256` — SHA-256 checksums of the module, tests and report.
@@ -81,6 +99,11 @@ python -m pytest tests/ -v     # 10 tests, all must pass
   or endorsed this software.
 - **Jean-François Brisson (Spark AI NLP)** — author of this test
   module, the deep analysis behind it, and the FAIL verdict.
+- **Omega-Genesis (Untitled7, Colab notebooks)** — source of the
+  "spooky" concept applied in `spooky_stability.py`: mean pairwise
+  |dot| over 5 noisy copies of a state (measured 0.9005 there).
+  The concept is reused; the value is not comparable (different
+  state, different noise).
 - **Companion work:** `sparkainlp-x/digital-to-wave-2-thz-validity`,
   which validity-checked the §2 human-wave-interface equations
   (dimensional error, impossible intensities, χ⁽²⁾ = 0 in bulk water),
